@@ -1,3 +1,8 @@
+#
+# Copyright: Ricardo Salveti <rsalveti@rsalveti.net>
+#
+# SPDX-License-Identifier: MIT
+
 def do_connect():
     import network
     import utils

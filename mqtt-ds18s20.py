@@ -1,3 +1,8 @@
+#
+# Copyright: Ricardo Salveti <rsalveti@rsalveti.net>
+#
+# SPDX-License-Identifier: MIT
+
 import time
 import machine
 import onewire, ds18x20

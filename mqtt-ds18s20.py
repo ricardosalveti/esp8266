@@ -13,6 +13,9 @@ from umqtt.robust import MQTTClient
 def main():
     config = utils.Config()
 
+    # On board LED
+    led = machine.Pin(2, machine.Pin.OUT, machine.Pin.PULL_UP)
+
     ds_data = machine.Pin(config.get("w1_gpio"), 14)
     ds = ds18x20.DS18X20(onewire.OneWire(ds_data))
 
@@ -41,6 +44,7 @@ def main():
     while True:
         ds.convert_temp()
         time.sleep_ms(750)
+        led.low()
         for rom in roms:
             ds_id = ubinascii.hexlify(rom).format()
             ds_topic = "w1_" + ds_id
@@ -48,6 +52,7 @@ def main():
                                           config.get(ds_topic, ds_id)),
                                           bytes(str(ds.read_temp(rom)),
                                           'utf-8'))
+        led.high()
         time.sleep(5)
 
 if __name__ == '__main__':

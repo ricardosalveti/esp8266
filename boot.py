@@ -6,10 +6,14 @@
 def do_connect():
     import network
     import utils
+    import machine
 
     config = utils.Config()
     sta_if = network.WLAN(network.STA_IF)
     ap_if = network.WLAN(network.AP_IF)
+
+    # On board LED
+    led = machine.Pin(2, machine.Pin.OUT)
 
     if ap_if.active():
         print("Disabling AP...");
@@ -22,5 +26,6 @@ def do_connect():
         while not sta_if.isconnected():
             pass
     print("Network configuration: ", sta_if.ifconfig())
+    led.low()
 
 do_connect()
